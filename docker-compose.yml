@@ -1,0 +1,40 @@
+version: "2"
+
+services:
+  app:
+    build: .
+    network_mode: bridge
+    links:
+      - postgres
+    volumes:
+      - "$HOME/.ssh:/home/dockerdev/.ssh"
+      - "$PWD:/app"
+    environment:
+      MIX_ENV: dev
+      DB_USER: admin
+      DB_PASSWORD: admin
+      DB_HOST: postgres
+    command: ["mix", "run"]
+
+  test:
+    build: .
+    network_mode: bridge
+    environment:
+      MIX_ENV: test
+      DB_USER: admin
+      DB_PASSWORD: admin
+      DB_HOST: postgres
+    links:
+      - postgres
+    volumes_from:
+      - app
+    command: ["mix", "test"]
+
+  postgres:
+    image: postgres:9.4
+    network_mode: bridge
+    expose:
+      - "5432"
+    environment:
+      DB_USER: admin
+      DB_PASSWORD: admin
