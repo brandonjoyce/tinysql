@@ -15,7 +15,7 @@ defmodule Tinysql.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger]]
+    [extra_applications: [:logger], mod: {Tinysql, []}]
   end
 
   # Dependencies can be Hex packages:
@@ -29,7 +29,8 @@ defmodule Tinysql.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:postgrex, "~> 0.13.2"}
+      {:postgrex, "~> 0.13.2"},
+      {:ecto, "~> 2.1.4"},
     ]
   end
 end

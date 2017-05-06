@@ -7,6 +7,14 @@ config :tinysql,
   db_password: System.get_env("DB_PASSWORD"),
   db_host: System.get_env("DB_HOST")
 
+config :tinysql, ecto_repos: [Tinysql.Repo]
+config :tinysql, Tinysql.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: System.get_env("DB_USER") || "postgres",
+  password: System.get_env("DB_PASSWORD") || "postgres",
+  hostname: System.get_env("DB_HOST") || "localhost",
+  database: "tinysql"
+
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
 # file won't be loaded nor affect the parent project. For this reason,
