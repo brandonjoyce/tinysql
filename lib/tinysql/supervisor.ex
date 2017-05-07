@@ -7,7 +7,8 @@ defmodule Tinysql.Supervisor do
 
   def init([]) do
     children = [
-      worker(Tinysql.Repo, [])
+      worker(Tinysql.Repo, []),
+      Plug.Adapters.Cowboy.child_spec(:http, Tinysql.Router, [], [port: 4000])
     ]
 
     supervise(children, strategy: :one_for_one)

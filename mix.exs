@@ -31,6 +31,8 @@ defmodule Tinysql.Mixfile do
     [
       {:postgrex, "~> 0.13.2"},
       {:ecto, "~> 2.1.4"},
+      {:cowboy, "~> 1.0.0"},
+      {:plug, "~> 1.0"},
     ]
   end
 end
